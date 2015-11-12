@@ -38,7 +38,7 @@ class nginx(
   $server_tokens             = 'off',
 ) {
   case $::osfamily {
-    RedHat: {
+    "RedHat": {
       $package_name         = 'nginx'
       $service_name         = 'nginx'
       $vhost_dir            = '/etc/nginx/vhost.d'
@@ -46,7 +46,7 @@ class nginx(
       $redundant_conf_files = [ '/etc/nginx/conf.d/default.conf',
                                 '/etc/nginx/conf.d/example_ssl.conf' ]
     }
-    Debian: {
+    "Debian": {
       $package_name         = 'nginx-full'
       $service_name         = 'nginx'
       $vhost_dir            = '/etc/nginx/sites-enabled'
