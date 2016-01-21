@@ -5,7 +5,7 @@
 #
 server {
 <%
-listen.each do |port|
+@listen.each do |port|
 -%>
   listen <%= port %>;
 <%
@@ -28,8 +28,14 @@ end
   ssl_certificate <%= @ssl_certificate %>;
   ssl_certificate_key <%= @ssl_certificate_key %>;
   ssl_ciphers <%= @ssl_ciphers %>;
-
+  ssl_protocols <%= @ssl_protocols %>;
 <% end -%>
+<% if @ssl_verify_client == 'on' and @ssl_client_certificate -%>
+  ssl_verify_client <%= @ssl_verify_client %>;
+  ssl_verify_depth <%= @ssl_verify_depth %>;
+  ssl_client_certificate <%= @ssl_client_certificate %>;
+<% end -%>
+
   charset <%= @charset %>;
 <%
 if @include
@@ -69,7 +75,7 @@ if @locations
 <%
     loc.sort.each do |key, values|
       if key != 'name'
-        if key == 'proxy_pass'
+        if key == 'proxy_pass' and @osfamily == 'Debian'
 -%>
     include proxy_params;
 <%

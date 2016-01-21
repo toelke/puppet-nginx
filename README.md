@@ -14,7 +14,7 @@ to prevent from applying incorrect config.
 * [nginx::snippet](#nginxsnippet)
 
 ### nginx
-This class installs php and sets up default php.ini file.
+This class installs nginx and sets up default nginx.conf file.
 
 #### Parameters
 * `package` - Used to specify what version of the package should be used.
@@ -172,7 +172,17 @@ with the error_page directive. Default: `off`.
 * `ssl_certificate_key` - SSL/TLS certificate key file location. Default: `undef`.
 
 * `ssl_ciphers` - What SSL/TLS ciphers to use.
-Default: `ALL:!kEDH!ADH:RC4+RSA:+HIGH:+MEDIUM:+SSLv2:+EXP`.
+Default: `HIGH:!aNULL:!MD5`.
+
+* `ssl_protocols` - Enables the specified protocols. The TLSv1.1 and TLSv1.2 parameters
+work only when the OpenSSL library of version 1.0.1 or higher is used.
+Default: `TLSv1 TLSv1.1 TLSv1.2`.
+
+* `ssl_client_certificate` - Specifies a file with trusted CA certificates in the PEM format used to verify client certificates. Default: `undef`
+
+* `ssl_verify_client` - Enables verification of client certificates. Default: `off`
+
+* `ssl_verify_depth` - Sets the verification depth in the client certificates chain. Default: `1`
 
 * `locations` - This parameter takes an array of hashes. The `name` parameter is what
 defines an actual location, the rest of parameters of the hash can be anything that nginx
